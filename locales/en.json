@@ -1,0 +1,155 @@
+{
+  "app": {
+    "title": "Math Kids",
+    "subtitle": "Fun Math Practice for Everyone!"
+  },
+  "operations": {
+    "addition": {
+      "title": "Addition",
+      "symbol": "+",
+      "description": "Learn to add numbers together"
+    },
+    "subtraction": {
+      "title": "Subtraction", 
+      "symbol": "-",
+      "description": "Learn to subtract numbers"
+    },
+    "multiplication": {
+      "title": "Multiplication",
+      "symbol": "×",
+      "description": "Learn to multiply numbers"
+    },
+    "division": {
+      "title": "Division",
+      "symbol": "÷",
+      "description": "Learn to divide numbers"
+    }
+  },
+  "difficulty": {
+    "selectTitle": "Choose Your Level",
+    "easy": {
+      "title": "Easy",
+      "description": "Numbers 1-10",
+      "range": "1 to 10"
+    },
+    "intermediate": {
+      "title": "Intermediate",
+      "description": "Numbers 1-50", 
+      "range": "1 to 50"
+    },
+    "advanced": {
+      "title": "Advanced",
+      "description": "Numbers 1-100",
+      "range": "1 to 100"
+    }
+  },
+  "game": {
+    "question": "Question",
+    "of": "of",
+    "yourAnswer": "Your Answer",
+    "submit": "Submit",
+    "next": "Next Question",
+    "correct": "Correct! Well done! 🎉",
+    "incorrect": "Not quite right. The answer is",
+    "tryAgain": "Try again!",
+    "timeUp": "Time's up!",
+    "gameComplete": "Game Complete!",
+    "score": "Score",
+    "timeSpent": "Time Spent",
+    "accuracy": "Accuracy"
+  },
+  "feedback": {
+    "excellent": "Excellent! 🌟",
+    "great": "Great job! 👍",
+    "good": "Good work! 😊",
+    "keepTrying": "Keep trying! 💪",
+    "almostThere": "Almost there! 🤔"
+  },
+  "dashboard": {
+    "title": "Your Progress",
+    "totalQuestions": "Total Questions",
+    "correctAnswers": "Correct Answers",
+    "accuracy": "Accuracy",
+    "timeSpent": "Time Spent",
+    "badges": "Badges Earned",
+    "recentSessions": "Recent Sessions",
+    "stats": "Statistics",
+    "achievements": "Achievements"
+  },
+  "badges": {
+    "firstCorrect": {
+      "title": "First Success",
+      "description": "Got your first answer correct!"
+    },
+    "streak5": {
+      "title": "5 in a Row",
+      "description": "5 correct answers in a row!"
+    },
+    "streak10": {
+      "title": "Perfect 10",
+      "description": "10 correct answers in a row!"
+    },
+    "speedster": {
+      "title": "Speed Demon",
+      "description": "Answered 10 questions in under 2 minutes!"
+    },
+    "perfectGame": {
+      "title": "Perfect Score",
+      "description": "100% accuracy in a complete game!"
+    },
+    "dedication": {
+      "title": "Dedicated Learner", 
+      "description": "Completed 10 practice sessions!"
+    },
+    "mathMaster": {
+      "title": "Math Master",
+      "description": "Mastered all difficulty levels!"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "audio": "Sound Effects",
+    "animations": "Animations",
+    "difficulty": "Default Difficulty",
+    "resetProgress": "Reset All Progress",
+    "confirmReset": "Are you sure you want to reset all progress? This cannot be undone.",
+    "progressReset": "Progress has been reset successfully!"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "play": "Play",
+    "back": "Back"
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No", 
+    "ok": "OK",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "save": "Save",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "playAgain": "Play Again"
+  },
+  "accessibility": {
+    "correctAnswer": "Correct answer",
+    "incorrectAnswer": "Incorrect answer",
+    "questionNumber": "Question number",
+    "enterAnswer": "Enter your answer",
+    "submitAnswer": "Submit your answer",
+    "skipToMain": "Skip to main content",
+    "menuButton": "Menu button",
+    "closeDialog": "Close dialog"
+  },
+  "time": {
+    "seconds": "seconds",
+    "minutes": "minutes",
+    "hours": "hours"
+  }
+} 
