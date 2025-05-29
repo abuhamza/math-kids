@@ -1,0 +1,65 @@
+# Math Kids Web Application - Project Intelligence
+
+## Project Patterns & Preferences
+
+### Code Organization
+- **Modular ES6**: Use ES6 modules for clean separation of concerns
+- **Service Layer Pattern**: GameService, ProgressService, StorageService, AudioService
+- **Component-based UI**: Reusable components with clear interfaces
+- **Utility-first CSS**: Tailwind CSS with custom CSS for animations
+
+### Child-Friendly Design Principles
+- **Large Touch Targets**: Minimum 44px for mobile accessibility
+- **High Contrast**: 4.5:1 minimum ratio for text readability
+- **Clear Visual Hierarchy**: Large headings, intuitive navigation flow
+- **Immediate Feedback**: Visual and audio responses within 100ms
+- **Encouraging Language**: Positive, supportive messaging for all interactions
+
+### Accessibility First Approach
+- **Semantic HTML**: Proper heading hierarchy (h1 > h2 > h3)
+- **ARIA Labels**: Comprehensive labeling for screen readers
+- **Keyboard Navigation**: Full tab-based navigation with focus indicators
+- **Audio Cues**: Sound feedback for correct/incorrect answers
+- **Color Independence**: Never rely solely on color for information
+
+### Multi-Language Implementation
+- **i18n Strategy**: JSON files for translations, dynamic loading
+- **Locale Detection**: Browser language with fallback to English
+- **Cultural Considerations**: Localized number formats and mathematical symbols
+- **RTL Support**: Prepared for future Arabic/Hebrew language support
+
+### Performance Optimization
+- **Animation Preferences**: CSS transforms over layout changes
+- **Lazy Loading**: Load language assets on demand
+- **Debounced Storage**: Prevent excessive local storage writes
+- **Memory Management**: Clean up event listeners and intervals
+
+### State Management Patterns
+- **Single Source of Truth**: Centralized app state object
+- **Immutable Updates**: Create new state objects rather than mutations
+- **Storage Sync**: Automatic persistence with local storage
+- **Event-Driven**: Use custom events for component communication
+
+### Development Workflow
+- **Mobile First**: Design for smallest screens, enhance for larger
+- **Progressive Enhancement**: Core functionality without JavaScript
+- **Browser Testing**: Test on real devices, not just DevTools simulation
+- **Accessibility Testing**: Regular screen reader and keyboard testing
+
+### Content Strategy
+- **Encouraging Tone**: Always positive, never punitive
+- **Clear Instructions**: Simple, age-appropriate language
+- **Visual Metaphors**: Use familiar concepts (stars, trophies, levels)
+- **Cultural Sensitivity**: Avoid region-specific references
+
+### Technical Constraints Learned
+- **No External CDNs**: Self-host all assets for offline capability
+- **Local Storage Limits**: 5-10MB typical limit, implement cleanup
+- **Audio Support**: Handle autoplay policies across browsers
+- **Touch Events**: Prevent double-tap zoom on mobile devices
+
+### Error Handling Philosophy
+- **Graceful Degradation**: App works even if features fail
+- **User-Friendly Messages**: No technical jargon in error messages
+- **Silent Recovery**: Auto-retry operations when possible
+- **Fallback Strategies**: Alternative approaches when primary fails 

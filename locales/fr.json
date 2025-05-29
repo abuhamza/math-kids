@@ -1,0 +1,156 @@
+{
+  "app": {
+    "title": "Math Kids",
+    "subtitle": "Pratique Amusante des Mathématiques pour Tous!"
+  },
+  "operations": {
+    "addition": {
+      "title": "Addition",
+      "symbol": "+",
+      "description": "Apprendre à additionner les nombres"
+    },
+    "subtraction": {
+      "title": "Soustraction", 
+      "symbol": "-",
+      "description": "Apprendre à soustraire les nombres"
+    },
+    "multiplication": {
+      "title": "Multiplication",
+      "symbol": "×",
+      "description": "Apprendre à multiplier les nombres"
+    },
+    "division": {
+      "title": "Division",
+      "symbol": "÷",
+      "description": "Apprendre à diviser les nombres"
+    }
+  },
+  "difficulty": {
+    "selectTitle": "Choisissez Votre Niveau",
+    "easy": {
+      "title": "Facile",
+      "description": "Nombres 1-10",
+      "range": "1 à 10"
+    },
+    "intermediate": {
+      "title": "Intermédiaire",
+      "description": "Nombres 1-50", 
+      "range": "1 à 50"
+    },
+    "advanced": {
+      "title": "Avancé",
+      "description": "Nombres 1-100",
+      "range": "1 à 100"
+    }
+  },
+  "game": {
+    "question": "Question",
+    "of": "de",
+    "yourAnswer": "Votre Réponse",
+    "submit": "Valider",
+    "next": "Question Suivante",
+    "correct": "Correct ! Bien joué ! 🎉",
+    "incorrect": "Pas tout à fait. La réponse est",
+    "tryAgain": "Essayez encore !",
+    "timeUp": "Temps écoulé !",
+    "gameComplete": "Jeu Terminé !",
+    "score": "Score",
+    "timeSpent": "Temps Passé",
+    "accuracy": "Précision"
+  },
+  "feedback": {
+    "excellent": "Excellent ! 🌟",
+    "great": "Super travail ! 👍",
+    "good": "Bon travail ! 😊",
+    "keepTrying": "Continuez ! 💪",
+    "almostThere": "Presque ! 🤔"
+  },
+  "dashboard": {
+    "title": "Vos Progrès",
+    "totalQuestions": "Questions Totales",
+    "correctAnswers": "Réponses Correctes",
+    "accuracy": "Précision",
+    "timeSpent": "Temps Passé",
+    "badges": "Badges Gagnés",
+    "recentSessions": "Sessions Récentes",
+    "stats": "Statistiques",
+    "achievements": "Réalisations"
+  },
+  "badges": {
+    "firstCorrect": {
+      "title": "Premier Succès",
+      "description": "Première réponse correcte !"
+    },
+    "streak5": {
+      "title": "5 d'Affilée",
+      "description": "5 réponses correctes d'affilée !"
+    },
+    "streak10": {
+      "title": "10 Parfait",
+      "description": "10 réponses correctes d'affilée !"
+    },
+    "speedster": {
+      "title": "Rapide comme l'Éclair",
+      "description": "10 questions en moins de 2 minutes !"
+    },
+    "perfectGame": {
+      "title": "Score Parfait",
+      "description": "100% de précision dans un jeu complet !"
+    },
+    "dedication": {
+      "title": "Apprenant Dévoué", 
+      "description": "10 sessions de pratique terminées !"
+    },
+    "mathMaster": {
+      "title": "Maître des Maths",
+      "description": "Tous les niveaux maîtrisés !"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "audio": "Effets Sonores",
+    "animations": "Animations",
+    "difficulty": "Difficulté par Défaut",
+    "resetProgress": "Réinitialiser les Progrès",
+    "confirmReset": "Êtes-vous sûr de vouloir réinitialiser tous les progrès ? Cette action est irréversible.",
+    "progressReset": "Progrès réinitialisés avec succès !"
+  },
+  "menu": {
+    "dashboard": "Tableau de Bord",
+    "settings": "Paramètres",
+    "play": "Jouer",
+    "back": "Retour"
+  },
+  "common": {
+    "yes": "Oui",
+    "no": "Non", 
+    "ok": "OK",
+    "cancel": "Annuler",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "save": "Sauvegarder",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "playAgain": "Rejouer",
+    "complete": "Terminé"
+  },
+  "accessibility": {
+    "correctAnswer": "Réponse correcte",
+    "incorrectAnswer": "Réponse incorrecte",
+    "questionNumber": "Numéro de question",
+    "enterAnswer": "Entrez votre réponse",
+    "submitAnswer": "Valider votre réponse",
+    "skipToMain": "Aller au contenu principal",
+    "menuButton": "Bouton menu",
+    "closeDialog": "Fermer la boîte de dialogue"
+  },
+  "time": {
+    "seconds": "secondes",
+    "minutes": "minutes",
+    "hours": "heures"
+  }
+} 

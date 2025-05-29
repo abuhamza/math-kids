@@ -1,0 +1,156 @@
+{
+  "app": {
+    "title": "Math Kids",
+    "subtitle": "Spaßige Mathe-Übungen für Alle!"
+  },
+  "operations": {
+    "addition": {
+      "title": "Addition",
+      "symbol": "+",
+      "description": "Lerne Zahlen zu addieren"
+    },
+    "subtraction": {
+      "title": "Subtraktion", 
+      "symbol": "-",
+      "description": "Lerne Zahlen zu subtrahieren"
+    },
+    "multiplication": {
+      "title": "Multiplikation",
+      "symbol": "×",
+      "description": "Lerne Zahlen zu multiplizieren"
+    },
+    "division": {
+      "title": "Division",
+      "symbol": "÷",
+      "description": "Lerne Zahlen zu dividieren"
+    }
+  },
+  "difficulty": {
+    "selectTitle": "Wähle Dein Level",
+    "easy": {
+      "title": "Einfach",
+      "description": "Zahlen 1-10",
+      "range": "1 bis 10"
+    },
+    "intermediate": {
+      "title": "Mittel",
+      "description": "Zahlen 1-50", 
+      "range": "1 bis 50"
+    },
+    "advanced": {
+      "title": "Schwer",
+      "description": "Zahlen 1-100",
+      "range": "1 bis 100"
+    }
+  },
+  "game": {
+    "question": "Frage",
+    "of": "von",
+    "yourAnswer": "Deine Antwort",
+    "submit": "Bestätigen",
+    "next": "Nächste Frage",
+    "correct": "Richtig! Gut gemacht! 🎉",
+    "incorrect": "Nicht ganz richtig. Die Antwort ist",
+    "tryAgain": "Versuche es nochmal!",
+    "timeUp": "Zeit abgelaufen!",
+    "gameComplete": "Spiel Beendet!",
+    "score": "Punkte",
+    "timeSpent": "Verbrachte Zeit",
+    "accuracy": "Genauigkeit"
+  },
+  "feedback": {
+    "excellent": "Ausgezeichnet! 🌟",
+    "great": "Großartige Arbeit! 👍",
+    "good": "Gute Arbeit! 😊",
+    "keepTrying": "Weiter versuchen! 💪",
+    "almostThere": "Fast geschafft! 🤔"
+  },
+  "dashboard": {
+    "title": "Dein Fortschritt",
+    "totalQuestions": "Gesamte Fragen",
+    "correctAnswers": "Richtige Antworten",
+    "accuracy": "Genauigkeit",
+    "timeSpent": "Verbrachte Zeit",
+    "badges": "Errungene Abzeichen",
+    "recentSessions": "Letzte Sitzungen",
+    "stats": "Statistiken",
+    "achievements": "Erfolge"
+  },
+  "badges": {
+    "firstCorrect": {
+      "title": "Erster Erfolg",
+      "description": "Erste richtige Antwort!"
+    },
+    "streak5": {
+      "title": "5 Hintereinander",
+      "description": "5 richtige Antworten hintereinander!"
+    },
+    "streak10": {
+      "title": "Perfekte 10",
+      "description": "10 richtige Antworten hintereinander!"
+    },
+    "speedster": {
+      "title": "Geschwindigkeitsdämon",
+      "description": "10 Fragen in unter 2 Minuten!"
+    },
+    "perfectGame": {
+      "title": "Perfekte Punktzahl",
+      "description": "100% Genauigkeit in einem kompletten Spiel!"
+    },
+    "dedication": {
+      "title": "Engagierter Lerner", 
+      "description": "10 Übungssitzungen abgeschlossen!"
+    },
+    "mathMaster": {
+      "title": "Mathe-Meister",
+      "description": "Alle Schwierigkeitsstufen gemeistert!"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "audio": "Soundeffekte",
+    "animations": "Animationen",
+    "difficulty": "Standard-Schwierigkeit",
+    "resetProgress": "Fortschritt Zurücksetzen",
+    "confirmReset": "Bist du sicher, dass du den gesamten Fortschritt zurücksetzen möchtest? Dies kann nicht rückgängig gemacht werden.",
+    "progressReset": "Fortschritt erfolgreich zurückgesetzt!"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "settings": "Einstellungen",
+    "play": "Spielen",
+    "back": "Zurück"
+  },
+  "common": {
+    "yes": "Ja",
+    "no": "Nein", 
+    "ok": "OK",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "close": "Schließen",
+    "save": "Speichern",
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "playAgain": "Nochmal Spielen",
+    "complete": "Abgeschlossen"
+  },
+  "accessibility": {
+    "correctAnswer": "Richtige Antwort",
+    "incorrectAnswer": "Falsche Antwort",
+    "questionNumber": "Fragennummer",
+    "enterAnswer": "Gib deine Antwort ein",
+    "submitAnswer": "Sende deine Antwort",
+    "skipToMain": "Zum Hauptinhalt springen",
+    "menuButton": "Menü-Taste",
+    "closeDialog": "Dialog schließen"
+  },
+  "time": {
+    "seconds": "Sekunden",
+    "minutes": "Minuten",
+    "hours": "Stunden"
+  }
+} 
