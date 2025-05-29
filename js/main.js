@@ -159,9 +159,6 @@ class MathKidsApp {
     if (this.state.settings.audioEnabled) {
       this.services.audio.playFeedback(isCorrect);
     }
-    //
-    // // Show visual feedback
-    // this.showAnswerFeedback(isCorrect);
     
     // Continue to next question or complete game
     setTimeout(() => {
@@ -170,7 +167,7 @@ class MathKidsApp {
       } else {
         this.completeGame();
       }
-    }, 1500);
+    }, 2000);
   }
 
   handleGameComplete(event) {
