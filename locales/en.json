@@ -135,7 +135,8 @@
     "loading": "Loading...",
     "error": "Error",
     "success": "Success",
-    "playAgain": "Play Again"
+    "playAgain": "Play Again",
+    "complete": "Complete"
   },
   "accessibility": {
     "correctAnswer": "Correct answer",

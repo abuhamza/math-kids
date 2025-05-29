@@ -53,3 +53,11 @@
 ### FR013: Export Progress Reports (Optional)
 - **User Story**: As a user, I want to share my progress easily with parents or teachers.
 - **Expected Outcome**: Users can export progress summaries as PDF documents for external sharing and review.
+
+### FR014: Enhanced Question Interface
+- **User Story**: As a user, I want a visually appealing and intuitive question interface.
+- **Expected Outcome**: Improved design for input fields, clearly distinguishable and appealing buttons, easy-to-understand question progress indicators, and clear level indicators.
+
+### FR015: Dashboard UI Improvement
+- **User Story**: As a user, I want an improved dashboard with visually appealing number displays and a user-friendly language switcher.
+- **Expected Outcome**: Enhanced visual clarity of statistics and progress numbers, clear and appealing language selection using country flags for improved user experience.

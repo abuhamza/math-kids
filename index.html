@@ -216,6 +216,213 @@
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.1);
     }
+
+    /* Enhanced UI Styles for FR014 & FR015 */
+    
+    /* Enhanced Progress Bar */
+    .progress-fill-animated {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-fill-animated::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    /* Enhanced Stat Cards */
+    .stat-card {
+      @apply relative rounded-2xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300 cursor-pointer overflow-hidden;
+    }
+    
+    .stat-card .stat-icon {
+      @apply text-3xl mb-3 block;
+    }
+    
+    .stat-card .stat-number {
+      @apply text-3xl md:text-4xl font-bold mb-2;
+    }
+    
+    .stat-card .stat-label {
+      @apply text-sm font-medium opacity-90;
+    }
+    
+    .stat-card .stat-sparkle {
+      @apply absolute top-2 right-2 w-2 h-2 bg-white rounded-full opacity-50;
+      animation: sparkle 2s infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Enhanced Language Switcher */
+    .language-btn {
+      @apply flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer;
+      @apply text-gray-600 hover:text-gray-800 hover:bg-white hover:shadow-md;
+    }
+    
+    .language-btn.active {
+      @apply bg-white text-gray-800 shadow-md;
+    }
+    
+    .language-btn:hover {
+      @apply transform scale-105;
+    }
+    
+    /* Enhanced Badge Cards */
+    .badge-card {
+      @apply relative;
+    }
+    
+    .badge-card::before {
+      content: '';
+      @apply absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-300 to-orange-400 p-1;
+      z-index: -1;
+    }
+    
+    .badge-card .badge-content {
+      @apply bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl;
+    }
+    
+    /* Enhanced Operation Cards */
+    .operation-card {
+      @apply relative;
+    }
+    
+    .operation-card::before {
+      content: '';
+      @apply absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 transition-opacity duration-300;
+      z-index: -1;
+    }
+    
+    .operation-card:hover::before {
+      @apply opacity-10;
+    }
+    
+    /* Enhanced Input Field Glow */
+    .input-glow {
+      @apply absolute inset-0 rounded-2xl pointer-events-none;
+      background: linear-gradient(45deg, #3B82F6, #8B5CF6, #EC4899);
+      filter: blur(4px);
+      z-index: -1;
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Enhanced Button Styles */
+    .btn-enhanced {
+      @apply relative overflow-hidden;
+    }
+    
+    .btn-enhanced::before {
+      content: '';
+      @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-200;
+    }
+    
+    .btn-enhanced:hover::before {
+      @apply opacity-20;
+    }
+    
+    /* Improved hover effects */
+    .hover-lift:hover {
+      @apply transform -translate-y-1 shadow-lg;
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+    
+    /* Enhanced animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .animate-gradient {
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+    }
+    
+    /* Better focus indicators */
+    .focus-enhanced:focus {
+      @apply outline-none ring-4 ring-purple-300 ring-opacity-50;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+    }
+    
+    /* Question number badge */
+    .question-badge {
+      @apply inline-flex items-center justify-center w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-bold rounded-full;
+    }
+    
+    /* Achievement notification */
+    .achievement-notify {
+      @apply fixed top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-4 rounded-xl shadow-lg z-50;
+      animation: slideInFromRight 0.5s ease-out;
+    }
+    
+    @keyframes slideInFromRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Improved accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    /* Dark mode support (future enhancement) */
+    @media (prefers-color-scheme: dark) {
+      .stat-card {
+        @apply bg-gray-800 text-white;
+      }
+      
+      .card {
+        @apply bg-gray-800 text-white;
+      }
+    }
   </style>
 </head>
 <body class="font-sans bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen">

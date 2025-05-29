@@ -159,9 +159,9 @@ class MathKidsApp {
     if (this.state.settings.audioEnabled) {
       this.services.audio.playFeedback(isCorrect);
     }
-    
-    // Show visual feedback
-    this.showAnswerFeedback(isCorrect);
+    //
+    // // Show visual feedback
+    // this.showAnswerFeedback(isCorrect);
     
     // Continue to next question or complete game
     setTimeout(() => {
@@ -375,60 +375,98 @@ class MathKidsApp {
     const appContainer = document.getElementById('app');
     const currentIndex = this.services.game.getGameState().currentQuestionIndex;
     const totalQuestions = this.services.game.getGameState().totalQuestions;
+    const progressPercentage = ((currentIndex + 1) / totalQuestions) * 100;
 
     appContainer.innerHTML = `
       <div class="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
         <div class="max-w-2xl mx-auto w-full">
-          <!-- Progress indicator -->
-          <div class="mb-8">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm text-gray-600">${i18n.t('game.question')} ${currentIndex + 1} ${i18n.t('game.of')} ${totalQuestions}</span>
-              <span class="text-sm text-gray-600">${this.state.currentOperation} - ${this.state.currentDifficulty}</span>
+          <!-- Enhanced Progress indicator with better visual design -->
+          <div class="mb-8 bg-white rounded-2xl p-6 shadow-lg">
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                <span class="text-lg font-semibold text-gray-700">${i18n.t('game.question')} ${currentIndex + 1} ${i18n.t('game.of')} ${totalQuestions}</span>
+              </div>
+              <div class="flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full">
+                <span class="text-2xl">${this.getOperationIcon(this.state.currentOperation)}</span>
+                <span class="text-sm font-medium text-gray-600 capitalize">${this.state.currentOperation}</span>
+                <span class="text-sm text-gray-500">•</span>
+                <span class="text-sm font-medium text-gray-600 capitalize">${i18n.t('difficulty.' + this.state.currentDifficulty + '.title')}</span>
+              </div>
             </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${((currentIndex + 1) / totalQuestions) * 100}%"></div>
+            <!-- Enhanced progress bar with gradient and animation -->
+            <div class="relative">
+              <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div class="progress-fill-animated bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-3 rounded-full transition-all duration-500 ease-out" 
+                     style="width: ${progressPercentage}%"></div>
+              </div>
+              <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
+            </div>
+            <div class="mt-2 text-right">
+              <span class="text-sm text-gray-500">${Math.round(progressPercentage)}% ${i18n.t('common.complete', 'Complete')}</span>
             </div>
           </div>
 
-          <!-- Question card -->
-          <div class="card text-center mb-8">
-            <h2 class="text-4xl md:text-6xl font-bold text-purple-800 mb-8">
-              ${question.question} = ?
-            </h2>
+          <!-- Enhanced Question card with better visual hierarchy -->
+          <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 border-t-4 border-gradient-to-r from-blue-500 to-purple-500">
+            <div class="text-center mb-8">
+              <div class="inline-block bg-gradient-to-br from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
+                ${i18n.t('game.question')} ${currentIndex + 1}
+              </div>
+              <h2 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-8 leading-tight">
+                ${question.question} = ?
+              </h2>
+            </div>
             
-            <form id="answerForm" class="space-y-6">
+            <form id="answerForm" class="space-y-8">
               <div>
-                <label for="answerInput" class="block text-xl font-semibold text-gray-700 mb-4">
+                <label for="answerInput" class="block text-xl font-bold text-gray-700 mb-4 text-center">
                   ${i18n.t('game.yourAnswer')}
                 </label>
-                <input 
-                  type="number" 
-                  id="answerInput" 
-                  class="input-field"
-                  placeholder="?"
-                  autocomplete="off"
-                  aria-describedby="answer-hint"
-                  required
-                >
+                <!-- Enhanced input field with better styling -->
+                <div class="relative">
+                  <input 
+                    type="number" 
+                    id="answerInput" 
+                    class="w-full text-3xl md:text-4xl font-bold text-center p-6 border-3 border-gray-300 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-200 focus:outline-none transition-all duration-200 bg-gray-50 focus:bg-white shadow-inner"
+                    placeholder="?"
+                    autocomplete="off"
+                    aria-describedby="answer-hint"
+                    required
+                  >
+                  <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 transition-opacity duration-200 pointer-events-none" id="inputGlow"></div>
+                </div>
                 <div id="answer-hint" class="sr-only">
                   ${i18n.t('accessibility.enterAnswer')}
                 </div>
               </div>
               
+              <!-- Enhanced buttons with better visual appeal -->
               <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button type="submit" class="btn-primary">
-                  ${i18n.t('game.submit')}
+                <button type="submit" class="group relative bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transform hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-green-300">
+                  <span class="relative z-10 flex items-center justify-center space-x-2">
+                    <span>✓</span>
+                    <span>${i18n.t('game.submit')}</span>
+                  </span>
+                  <div class="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-200"></div>
                 </button>
-                <button type="button" data-action="backToMenu" class="btn-secondary">
-                  ${i18n.t('common.back')}
+                <button type="button" data-action="backToMenu" class="group relative bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transform hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-gray-300">
+                  <span class="relative z-10 flex items-center justify-center space-x-2">
+                    <span>←</span>
+                    <span>${i18n.t('common.back')}</span>
+                  </span>
+                  <div class="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-200"></div>
                 </button>
               </div>
             </form>
           </div>
 
-          <!-- Hint area (initially hidden) -->
-          <div id="hintArea" class="card bg-yellow-50 border-yellow-200 hidden">
-            <p id="hintText" class="text-gray-700"></p>
+          <!-- Enhanced Hint area with better styling -->
+          <div id="hintArea" class="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-2xl p-6 hidden shadow-lg">
+            <div class="flex items-center space-x-3">
+              <div class="text-2xl">💡</div>
+              <p id="hintText" class="text-gray-700 font-medium"></p>
+            </div>
           </div>
         </div>
       </div>
@@ -437,9 +475,21 @@ class MathKidsApp {
     // Store question start time
     this.currentQuestionStartTime = Date.now();
     
-    // Focus on input
+    // Enhanced input focus with glow effect
     setTimeout(() => {
-      document.getElementById('answerInput').focus();
+      const input = document.getElementById('answerInput');
+      const glow = document.getElementById('inputGlow');
+      
+      input.focus();
+      
+      // Add glow effect on focus
+      input.addEventListener('focus', () => {
+        glow.style.opacity = '0.1';
+      });
+      
+      input.addEventListener('blur', () => {
+        glow.style.opacity = '0';
+      });
     }, 100);
 
     // Speak the question for accessibility
@@ -626,51 +676,99 @@ class MathKidsApp {
     appContainer.innerHTML = `
       <div class="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-4">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-purple-800 mb-2">
+          <!-- Enhanced Header with Language Switcher -->
+          <div class="text-center mb-8 bg-white rounded-2xl p-6 shadow-lg">
+            <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
               ${i18n.t('dashboard.title')}
             </h1>
-            <button data-action="backToMenu" class="btn-secondary">
-              ← ${i18n.t('common.back')}
+            
+            <!-- Enhanced Language Switcher with Country Flags -->
+            <div class="flex items-center justify-center space-x-4 mb-4">
+              <span class="text-sm font-medium text-gray-600">${i18n.t('settings.language')}:</span>
+              <div class="flex bg-gray-100 rounded-xl p-1 shadow-inner">
+                <button 
+                  class="language-btn ${this.state.currentLanguage === 'en' ? 'active' : ''}" 
+                  data-lang="en"
+                  onclick="window.mathKidsApp.switchLanguage('en')"
+                >
+                  <span class="text-2xl">🇺🇸</span>
+                  <span class="hidden sm:inline ml-2">English</span>
+                </button>
+                <button 
+                  class="language-btn ${this.state.currentLanguage === 'fr' ? 'active' : ''}" 
+                  data-lang="fr"
+                  onclick="window.mathKidsApp.switchLanguage('fr')"
+                >
+                  <span class="text-2xl">🇫🇷</span>
+                  <span class="hidden sm:inline ml-2">Français</span>
+                </button>
+                <button 
+                  class="language-btn ${this.state.currentLanguage === 'de' ? 'active' : ''}" 
+                  data-lang="de"
+                  onclick="window.mathKidsApp.switchLanguage('de')"
+                >
+                  <span class="text-2xl">🇩🇪</span>
+                  <span class="hidden sm:inline ml-2">Deutsch</span>
+                </button>
+              </div>
+            </div>
+            
+            <button data-action="backToMenu" class="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all duration-200">
+              <span>←</span>
+              <span>${i18n.t('common.back')}</span>
             </button>
           </div>
           
-          <!-- Statistics Overview -->
+          <!-- Enhanced Statistics Overview with better number displays -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="card bg-blue-50">
-              <div class="text-3xl font-bold text-blue-600">${progressSummary.totalQuestions}</div>
-              <div class="text-blue-800">${i18n.t('dashboard.totalQuestions')}</div>
+            <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+              <div class="stat-icon">📊</div>
+              <div class="stat-number">${this.formatNumber(progressSummary.totalQuestions)}</div>
+              <div class="stat-label">${i18n.t('dashboard.totalQuestions')}</div>
+              <div class="stat-sparkle"></div>
             </div>
             
-            <div class="card bg-green-50">
-              <div class="text-3xl font-bold text-green-600">${progressSummary.correctAnswers}</div>
-              <div class="text-green-800">${i18n.t('dashboard.correctAnswers')}</div>
+            <div class="stat-card bg-gradient-to-br from-green-500 to-green-600 text-white">
+              <div class="stat-icon">✅</div>
+              <div class="stat-number">${this.formatNumber(progressSummary.correctAnswers)}</div>
+              <div class="stat-label">${i18n.t('dashboard.correctAnswers')}</div>
+              <div class="stat-sparkle"></div>
             </div>
             
-            <div class="card bg-purple-50">
-              <div class="text-3xl font-bold text-purple-600">${progressSummary.accuracy}%</div>
-              <div class="text-purple-800">${i18n.t('dashboard.accuracy')}</div>
+            <div class="stat-card bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+              <div class="stat-icon">🎯</div>
+              <div class="stat-number">${progressSummary.accuracy}%</div>
+              <div class="stat-label">${i18n.t('dashboard.accuracy')}</div>
+              <div class="stat-sparkle"></div>
             </div>
             
-            <div class="card bg-yellow-50">
-              <div class="text-3xl font-bold text-yellow-600">${badges.length}</div>
-              <div class="text-yellow-800">${i18n.t('dashboard.badges')}</div>
+            <div class="stat-card bg-gradient-to-br from-yellow-500 to-orange-500 text-white">
+              <div class="stat-icon">🏆</div>
+              <div class="stat-number">${this.formatNumber(badges.length)}</div>
+              <div class="stat-label">${i18n.t('dashboard.badges')}</div>
+              <div class="stat-sparkle"></div>
             </div>
           </div>
           
-          <!-- Badges Section -->
-          <div class="card mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">${i18n.t('dashboard.achievements')}</h2>
+          <!-- Enhanced Badges Section -->
+          <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="text-3xl">🎖️</div>
+              <h2 class="text-2xl font-bold text-gray-800">${i18n.t('dashboard.achievements')}</h2>
+            </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              ${this.renderBadges(badges)}
+              ${this.renderEnhancedBadges(badges)}
             </div>
           </div>
           
-          <!-- Progress by Operation -->
-          <div class="card">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">${i18n.t('dashboard.stats')}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              ${this.renderOperationStats(progressSummary.masteryProgress)}
+          <!-- Enhanced Progress by Operation -->
+          <div class="bg-white rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="text-3xl">📈</div>
+              <h2 class="text-2xl font-bold text-gray-800">${i18n.t('dashboard.stats')}</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              ${this.renderEnhancedOperationStats(progressSummary.masteryProgress)}
             </div>
           </div>
         </div>
@@ -817,39 +915,100 @@ class MathKidsApp {
     }
   }
 
-  renderBadges(badges) {
+  getOperationIcon(operation) {
+    const icons = {
+      addition: '➕',
+      subtraction: '➖', 
+      multiplication: '✖️',
+      division: '➗'
+    };
+    return icons[operation] || '📝';
+  }
+
+  formatNumber(num) {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
+  }
+
+  renderEnhancedBadges(badges) {
     if (badges.length === 0) {
-      return '<div class="col-span-full text-center text-gray-500">No badges earned yet. Keep practicing!</div>';
+      return `
+        <div class="col-span-full text-center py-8">
+          <div class="text-6xl mb-4">🎯</div>
+          <p class="text-gray-500 font-medium">No badges earned yet. Keep practicing!</p>
+        </div>
+      `;
     }
     
     return badges.map(badge => `
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 text-center">
-        <div class="text-3xl mb-2">🏆</div>
-        <div class="font-semibold text-yellow-800">${badge.title}</div>
-        <div class="text-sm text-yellow-600">${badge.description}</div>
+      <div class="badge-card group cursor-pointer transform hover:scale-105 transition-all duration-200">
+        <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-6 text-center shadow-lg hover:shadow-xl">
+          <div class="text-4xl mb-3 transform group-hover:scale-110 transition-transform duration-200">🏆</div>
+          <div class="font-bold text-white text-lg mb-2">${badge.title}</div>
+          <div class="text-yellow-100 text-sm leading-relaxed">${badge.description}</div>
+          <div class="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-200"></div>
+        </div>
       </div>
     `).join('');
   }
 
-  renderOperationStats(masteryProgress) {
+  renderEnhancedOperationStats(masteryProgress) {
     const operations = ['addition', 'subtraction', 'multiplication', 'division'];
     const operationIcons = { addition: '➕', subtraction: '➖', multiplication: '✖️', division: '➗' };
+    const operationColors = { 
+      addition: 'from-green-400 to-green-600', 
+      subtraction: 'from-blue-400 to-blue-600', 
+      multiplication: 'from-red-400 to-red-600', 
+      division: 'from-purple-400 to-purple-600' 
+    };
     
     return operations.map(operation => {
       const stats = masteryProgress[operation];
       const totalMastery = Object.values(stats).reduce((sum, level) => sum + level.level, 0) / 3;
       
       return `
-        <div class="bg-white p-4 rounded-lg border">
-          <div class="text-2xl mb-2">${operationIcons[operation]}</div>
-          <div class="font-semibold capitalize">${operation}</div>
-          <div class="text-sm text-gray-600">Mastery: ${Math.round(totalMastery)}%</div>
-          <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
-            <div class="bg-purple-500 h-2 rounded-full" style="width: ${totalMastery}%"></div>
+        <div class="operation-card bg-white rounded-xl border-2 border-gray-100 p-6 hover:border-gray-200 transition-all duration-200 hover:shadow-lg">
+          <div class="text-center mb-4">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${operationColors[operation]} rounded-full text-white text-2xl font-bold mb-3 shadow-lg">
+              ${operationIcons[operation]}
+            </div>
+            <h3 class="font-bold text-gray-800 text-lg capitalize">${operation}</h3>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-medium text-gray-600">Mastery:</span>
+              <span class="text-lg font-bold text-gray-800">${Math.round(totalMastery)}%</span>
+            </div>
+            
+            <div class="relative">
+              <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div class="bg-gradient-to-r ${operationColors[operation]} h-3 rounded-full transition-all duration-500 ease-out" 
+                     style="width: ${totalMastery}%"></div>
+              </div>
+              <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-pulse rounded-full"></div>
+            </div>
+            
+            ${totalMastery >= 80 ? 
+              '<div class="flex items-center justify-center mt-2"><span class="text-green-600 text-sm font-medium">⭐ Mastered!</span></div>' : 
+              totalMastery >= 50 ? 
+              '<div class="flex items-center justify-center mt-2"><span class="text-yellow-600 text-sm font-medium">📈 Progressing</span></div>' :
+              '<div class="flex items-center justify-center mt-2"><span class="text-gray-500 text-sm font-medium">🌱 Learning</span></div>'
+            }
           </div>
         </div>
       `;
     }).join('');
+  }
+
+  switchLanguage(lang) {
+    this.updateSetting('language', lang);
+    // Refresh dashboard to show new language
+    setTimeout(() => this.showDashboard(), 100);
   }
 
   showModal(config) {
