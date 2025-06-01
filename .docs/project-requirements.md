@@ -61,3 +61,7 @@
 ### FR015: Dashboard UI Improvement
 - **User Story**: As a user, I want an improved dashboard with visually appealing number displays and a user-friendly language switcher.
 - **Expected Outcome**: Enhanced visual clarity of statistics and progress numbers, clear and appealing language selection using country flags for improved user experience.
+
+### FR016: Multiple Choice Answers
+- **User Story**: As a user, I want multiple-choice answers to prevent frequent keyboard pop-ups.
+- **Expected Outcome**: Display multiple-choice answer options for math questions, enhancing usability by reducing keyboard interactions.

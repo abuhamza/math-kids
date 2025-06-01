@@ -355,4 +355,121 @@ export class GameService {
     
     return hints[Math.min(question.attempts || 0, hints.length - 1)];
   }
+
+  // Generate multiple choice options for a question
+  generateMultipleChoiceOptions(question, numberOfOptions = 4) {
+    if (!question || question.correctAnswer === undefined) {
+      return [];
+    }
+
+    const correctAnswer = question.correctAnswer;
+    const distractors = new Set();
+    const operation = question.operation;
+    const operand1 = question.operand1;
+    const operand2 = question.operand2;
+
+    // Generate distractors based on operation type
+    while (distractors.size < numberOfOptions - 1) {
+      let distractor;
+      
+      switch (operation) {
+        case 'addition':
+          distractor = this.generateAdditionDistractors(operand1, operand2, correctAnswer);
+          break;
+        case 'subtraction':
+          distractor = this.generateSubtractionDistractors(operand1, operand2, correctAnswer);
+          break;
+        case 'multiplication':
+          distractor = this.generateMultiplicationDistractors(operand1, operand2, correctAnswer);
+          break;
+        case 'division':
+          distractor = this.generateDivisionDistractors(operand1, operand2, correctAnswer);
+          break;
+        default:
+          distractor = this.generateGenericDistractor(correctAnswer);
+      }
+
+      // Ensure distractor is valid and different from correct answer
+      if (distractor !== correctAnswer && distractor >= 0 && distractor <= 1000) {
+        distractors.add(distractor);
+      }
+    }
+
+    // Combine correct answer with distractors and shuffle
+    const options = [correctAnswer, ...Array.from(distractors)];
+    return this.shuffleArray(options);
+  }
+
+  generateAdditionDistractors(operand1, operand2, correctAnswer) {
+    const strategies = [
+      () => correctAnswer + this.randomInt(1, 5), // Add a small number
+      () => correctAnswer - this.randomInt(1, 5), // Subtract a small number
+      () => operand1 + operand2 + operand1, // Add first operand twice
+      () => operand1 * operand2, // Multiply instead of add
+      () => Math.abs(operand1 - operand2), // Subtract instead of add
+      () => operand1 + this.randomInt(1, 10), // Add to first operand only
+      () => operand2 + this.randomInt(1, 10), // Add to second operand only
+    ];
+    
+    const strategy = strategies[this.randomInt(0, strategies.length - 1)];
+    return strategy();
+  }
+
+  generateSubtractionDistractors(operand1, operand2, correctAnswer) {
+    const strategies = [
+      () => correctAnswer + this.randomInt(1, 5), // Add a small number
+      () => correctAnswer - this.randomInt(1, 3), // Subtract a small number  
+      () => operand1 + operand2, // Add instead of subtract
+      () => operand2 - operand1, // Reverse the operation
+      () => operand1 - this.randomInt(1, operand2), // Different subtraction
+      () => Math.abs(correctAnswer + operand2), // Common mistake
+      () => operand1, // Forgot to subtract
+    ];
+    
+    const strategy = strategies[this.randomInt(0, strategies.length - 1)];
+    return strategy();
+  }
+
+  generateMultiplicationDistractors(operand1, operand2, correctAnswer) {
+    const strategies = [
+      () => correctAnswer + operand1, // Add one more group
+      () => correctAnswer - operand1, // Subtract one group
+      () => operand1 + operand2, // Add instead of multiply
+      () => (operand1 + 1) * operand2, // Off by one in first operand
+      () => operand1 * (operand2 + 1), // Off by one in second operand
+      () => operand1 * (operand2 - 1), // Off by one in second operand
+      () => correctAnswer + this.randomInt(1, 10), // Random close number
+    ];
+    
+    const strategy = strategies[this.randomInt(0, strategies.length - 1)];
+    return strategy();
+  }
+
+  generateDivisionDistractors(operand1, operand2, correctAnswer) {
+    const strategies = [
+      () => correctAnswer + 1, // Off by one
+      () => correctAnswer - 1, // Off by one
+      () => Math.floor(operand1 / operand2) + 1, // Include remainder as whole number
+      () => operand1 - operand2, // Subtract instead of divide
+      () => operand2, // Confused operands
+      () => operand1, // Forgot to divide
+      () => correctAnswer * 2, // Double the answer
+    ];
+    
+    const strategy = strategies[this.randomInt(0, strategies.length - 1)];
+    return strategy();
+  }
+
+  generateGenericDistractor(correctAnswer) {
+    const strategies = [
+      () => correctAnswer + this.randomInt(1, 5),
+      () => correctAnswer - this.randomInt(1, 5),
+      () => correctAnswer * 2,
+      () => Math.floor(correctAnswer / 2),
+      () => correctAnswer + 10,
+    ];
+    
+    const strategy = strategies[this.randomInt(0, strategies.length - 1)];
+    return strategy();
+  }
 } 

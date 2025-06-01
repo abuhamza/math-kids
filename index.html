@@ -423,6 +423,68 @@
         @apply bg-gray-800 text-white;
       }
     }
+
+    /* Multiple Choice Button Styles for FR016 */
+    .choice-button {
+      transition: all 0.3s ease;
+    }
+    
+    .choice-button:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .choice-button:focus {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+    }
+    
+    .choice-correct {
+      @apply bg-gradient-to-r from-green-100 to-emerald-100 border-green-500 text-green-800;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+      animation: correctPulse 0.6s ease-in-out;
+    }
+    
+    .choice-incorrect {
+      @apply bg-gradient-to-r from-red-100 to-pink-100 border-red-500 text-red-800;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+      animation: incorrectShake 0.6s ease-in-out;
+    }
+    
+    .choice-correct-highlight {
+      @apply bg-gradient-to-r from-green-50 to-emerald-50 border-green-400 text-green-700;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    }
+    
+    .choice-disabled {
+      @apply bg-gray-100 border-gray-300 text-gray-500;
+      opacity: 0.6;
+    }
+    
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1.05); }
+    }
+    
+    @keyframes incorrectShake {
+      0%, 100% { transform: translateX(0) scale(1.05); }
+      25% { transform: translateX(-5px) scale(1.05); }
+      75% { transform: translateX(5px) scale(1.05); }
+    }
+    
+    /* Enhanced accessibility for multiple choice */
+    .choice-button[aria-checked="true"] {
+      outline: 2px solid #3B82F6;
+      outline-offset: 2px;
+    }
+    
+    /* Responsive adjustments for multiple choice */
+    @media (max-width: 640px) {
+      .choice-button {
+        @apply text-xl py-4 px-6;
+      }
+    }
   </style>
 </head>
 <body class="font-sans bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen">
