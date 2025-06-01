@@ -136,10 +136,9 @@ class MathKidsApp {
   }
 
   handleFormSubmit(event) {
-    if (event.target.id === 'answerForm') {
-      event.preventDefault();
-      this.submitAnswer();
-    }
+    // Multiple choice interface doesn't use form submission
+    // Answer selection is handled by button clicks
+    event.preventDefault();
   }
 
   handleSettingsChange(event) {
@@ -368,6 +367,9 @@ class MathKidsApp {
       return;
     }
 
+    // Generate multiple choice options
+    const multipleChoiceOptions = this.services.game.generateMultipleChoiceOptions(question, 4);
+
     const i18n = this.services.i18n;
     const appContainer = document.getElementById('app');
     const currentIndex = this.services.game.getGameState().currentQuestionIndex;
@@ -405,48 +407,49 @@ class MathKidsApp {
           </div>
 
           <!-- Enhanced Question card with better visual hierarchy -->
-          <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 border-t-4 border-gradient-to-r from-blue-500 to-purple-500">
+          <div id="questionContainer" class="bg-white rounded-3xl shadow-xl p-8 mb-6 border-t-4 border-gradient-to-r from-blue-500 to-purple-500">
             <div class="text-center mb-8">
               <div class="inline-block bg-gradient-to-br from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
                 ${i18n.t('game.question')} ${currentIndex + 1}
               </div>
-              <h2 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-8 leading-tight">
+              <h2 id="question-heading" class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-8 leading-tight">
                 ${question.question} = ?
               </h2>
             </div>
             
-            <form id="answerForm" class="space-y-8">
+            <!-- Multiple Choice Options -->
+            <div class="space-y-6">
               <div>
-                <label for="answerInput" class="block text-xl font-bold text-gray-700 mb-4 text-center">
-                  ${i18n.t('game.yourAnswer')}
-                </label>
-                <!-- Enhanced input field with better styling -->
-                <div class="relative">
-                  <input 
-                    type="number" 
-                    id="answerInput" 
-                    class="w-full text-3xl md:text-4xl font-bold text-center p-6 border-3 border-gray-300 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-200 focus:outline-none transition-all duration-200 bg-gray-50 focus:bg-white shadow-inner"
-                    placeholder="?"
-                    autocomplete="off"
-                    aria-describedby="answer-hint"
-                    required
-                  >
-                  <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 transition-opacity duration-200 pointer-events-none" id="inputGlow"></div>
+                <h3 class="block text-xl font-bold text-gray-700 mb-6 text-center">
+                  ${i18n.t('game.selectAnswer')}
+                </h3>
+                <!-- Multiple choice buttons -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="radiogroup" aria-labelledby="question-heading">
+                  ${multipleChoiceOptions.map((option, index) => `
+                    <button 
+                      type="button" 
+                      class="choice-button w-full bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 border-2 border-blue-200 hover:border-blue-400 text-gray-800 text-2xl md:text-3xl font-bold py-6 px-8 rounded-2xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-blue-500"
+                      data-answer="${option}"
+                      data-index="${index}"
+                      role="radio"
+                      aria-checked="false"
+                      aria-describedby="answer-hint"
+                      tabindex="${index === 0 ? '0' : '-1'}"
+                    >
+                      <span class="flex items-center justify-center space-x-2">
+                        <span class="w-8 h-8 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-lg font-bold">${String.fromCharCode(65 + index)}</span>
+                        <span>${option}</span>
+                      </span>
+                    </button>
+                  `).join('')}
                 </div>
                 <div id="answer-hint" class="sr-only">
-                  ${i18n.t('accessibility.enterAnswer')}
+                  ${i18n.t('accessibility.selectAnswer')}
                 </div>
               </div>
               
-              <!-- Enhanced buttons with better visual appeal -->
-              <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button type="submit" class="group relative bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transform hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-green-300">
-                  <span class="relative z-10 flex items-center justify-center space-x-2">
-                    <span>✓</span>
-                    <span>${i18n.t('game.submit')}</span>
-                  </span>
-                  <div class="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-200"></div>
-                </button>
+              <!-- Navigation buttons -->
+              <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                 <button type="button" data-action="backToMenu" class="group relative bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transform hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-gray-300">
                   <span class="relative z-10 flex items-center justify-center space-x-2">
                     <span>←</span>
@@ -455,7 +458,7 @@ class MathKidsApp {
                   <div class="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-200"></div>
                 </button>
               </div>
-            </form>
+            </div>
           </div>
 
           <!-- Enhanced Hint area with better styling -->
@@ -472,21 +475,9 @@ class MathKidsApp {
     // Store question start time
     this.currentQuestionStartTime = Date.now();
     
-    // Enhanced input focus with glow effect
+    // Setup multiple choice button interactions
     setTimeout(() => {
-      const input = document.getElementById('answerInput');
-      const glow = document.getElementById('inputGlow');
-      
-      input.focus();
-      
-      // Add glow effect on focus
-      input.addEventListener('focus', () => {
-        glow.style.opacity = '0.1';
-      });
-      
-      input.addEventListener('blur', () => {
-        glow.style.opacity = '0';
-      });
+      this.setupMultipleChoiceInteractions(question.correctAnswer);
     }, 100);
 
     // Speak the question for accessibility
@@ -495,66 +486,119 @@ class MathKidsApp {
     }
   }
 
-  submitAnswer() {
-    const answerInput = document.getElementById('answerInput');
-    const answer = answerInput.value.trim();
+  setupMultipleChoiceInteractions(correctAnswer) {
+    const choiceButtons = document.querySelectorAll('.choice-button');
     
-    if (!answer) {
-      this.showValidationError('Please enter an answer');
-      return;
-    }
-
-    const numAnswer = parseFloat(answer);
-    if (isNaN(numAnswer)) {
-      this.showValidationError('Please enter a valid number');
-      return;
-    }
-
-    // Submit to game service
-    const result = this.services.game.submitAnswer(numAnswer, this.currentQuestionStartTime);
+    choiceButtons.forEach((button, index) => {
+      // Click handler
+      button.addEventListener('click', () => {
+        this.selectChoice(button, correctAnswer);
+      });
+      
+      // Keyboard navigation
+      button.addEventListener('keydown', (event) => {
+        switch (event.key) {
+          case 'Enter':
+          case ' ':
+            event.preventDefault();
+            this.selectChoice(button, correctAnswer);
+            break;
+          case 'ArrowDown':
+          case 'ArrowRight':
+            event.preventDefault();
+            const nextIndex = (index + 1) % choiceButtons.length;
+            choiceButtons[nextIndex].focus();
+            break;
+          case 'ArrowUp':
+          case 'ArrowLeft':
+            event.preventDefault();
+            const prevIndex = (index - 1 + choiceButtons.length) % choiceButtons.length;
+            choiceButtons[prevIndex].focus();
+            break;
+        }
+      });
+    });
     
-    // Disable form during feedback
-    const form = document.getElementById('answerForm');
-    const inputs = form.querySelectorAll('input, button');
-    inputs.forEach(input => input.disabled = true);
-
-    // Show feedback
-    this.showAnswerFeedback(result.isCorrect, result.correctAnswer);
+    // Focus first button by default
+    if (choiceButtons.length > 0) {
+      choiceButtons[0].focus();
+    }
   }
 
-  showAnswerFeedback(isCorrect, correctAnswer = null) {
-    const i18n = this.services.i18n;
-    const answerInput = document.getElementById('answerInput');
+  selectChoice(selectedButton, correctAnswer) {
+    const answer = parseFloat(selectedButton.dataset.answer);
+    const isCorrect = answer === correctAnswer;
     
-    // Update input styling
-    answerInput.classList.remove('answer-correct', 'answer-incorrect');
-    answerInput.classList.add(isCorrect ? 'answer-correct' : 'answer-incorrect');
+    // Disable all buttons during feedback
+    const choiceButtons = document.querySelectorAll('.choice-button');
+    choiceButtons.forEach(button => {
+      button.disabled = true;
+      button.classList.remove('hover:scale-105');
+    });
+    
+    // Style the selected button and show correct answer
+    choiceButtons.forEach(button => {
+      const buttonAnswer = parseFloat(button.dataset.answer);
+      if (button === selectedButton) {
+        // User's selection
+        button.classList.add(isCorrect ? 'choice-correct' : 'choice-incorrect');
+        button.setAttribute('aria-checked', 'true');
+      } else if (buttonAnswer === correctAnswer) {
+        // Correct answer (if user was wrong)
+        button.classList.add('choice-correct-highlight');
+      } else {
+        // Other options
+        button.classList.add('choice-disabled');
+      }
+    });
+    
+    // Submit the answer
+    this.submitMultipleChoiceAnswer(answer);
+  }
+
+  submitMultipleChoiceAnswer(answer) {
+    // Submit to game service
+    const result = this.services.game.submitAnswer(answer, this.currentQuestionStartTime);
+    
+    // Show feedback
+    this.showMultipleChoiceFeedback(result.isCorrect, result.correctAnswer);
+  }
+
+  showMultipleChoiceFeedback(isCorrect, correctAnswer = null) {
+    const i18n = this.services.i18n;
+    
+    // Remove any existing feedback message
+    const existingFeedback = document.getElementById('feedbackMessage');
+    if (existingFeedback) {
+      existingFeedback.remove();
+    }
     
     // Create feedback message
     const feedbackContainer = document.createElement('div');
     feedbackContainer.id = 'feedbackMessage';
-    feedbackContainer.className = `mt-4 p-4 rounded-lg text-center font-semibold ${
+    feedbackContainer.className = `mt-6 p-6 rounded-2xl text-center font-semibold shadow-lg ${
       isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
     }`;
     
     if (isCorrect) {
       feedbackContainer.innerHTML = `
-        <div class="text-2xl mb-2">🎉</div>
-        <div>${i18n.t('game.correct')}</div>
+        <div class="text-4xl mb-3">🎉</div>
+        <div class="text-xl font-bold">${i18n.t('game.correct')}</div>
       `;
     } else {
       feedbackContainer.innerHTML = `
-        <div class="text-2xl mb-2">🤔</div>
-        <div>${i18n.t('game.incorrect')} ${correctAnswer}</div>
+        <div class="text-4xl mb-3">🤔</div>
+        <div class="text-xl font-bold">${i18n.t('game.incorrect')}</div>
+        <div class="text-lg mt-2">${i18n.t('game.correctAnswerWas')} ${correctAnswer}</div>
       `;
     }
     
-    // Insert feedback after the form
-    const form = document.getElementById('answerForm');
-    form.parentNode.insertBefore(feedbackContainer, form.nextSibling);
+    // Insert feedback after the question container
+    const questionContainer = document.getElementById('questionContainer');
+    questionContainer.parentNode.insertBefore(feedbackContainer, questionContainer.nextSibling);
     
     // Announce for screen readers
-    this.services.audio.announceText(isCorrect ? i18n.t('game.correct') : `${i18n.t('game.incorrect')} ${correctAnswer}`);
+    this.services.audio.announceText(isCorrect ? i18n.t('game.correct') : `${i18n.t('game.incorrect')} ${i18n.t('game.correctAnswerWas')} ${correctAnswer}`);
     
     // Continue after delay
     setTimeout(() => {

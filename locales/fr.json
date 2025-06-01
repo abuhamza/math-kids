@@ -45,17 +45,19 @@
   },
   "game": {
     "question": "Question",
-    "of": "de",
-    "yourAnswer": "Votre Réponse",
+    "of": "sur",
+    "yourAnswer": "Votre réponse",
+    "selectAnswer": "Sélectionnez votre réponse",
     "submit": "Valider",
-    "next": "Question Suivante",
+    "next": "Question suivante",
     "correct": "Correct ! Bien joué ! 🎉",
-    "incorrect": "Pas tout à fait. La réponse est",
+    "incorrect": "Pas tout à fait.",
+    "correctAnswerWas": "La bonne réponse était",
     "tryAgain": "Essayez encore !",
     "timeUp": "Temps écoulé !",
-    "gameComplete": "Jeu Terminé !",
+    "gameComplete": "Jeu terminé !",
     "score": "Score",
-    "timeSpent": "Temps Passé",
+    "timeSpent": "Temps passé",
     "accuracy": "Précision"
   },
   "feedback": {
@@ -139,14 +141,15 @@
     "complete": "Terminé"
   },
   "accessibility": {
-    "correctAnswer": "Réponse correcte",
+    "correctAnswer": "Bonne réponse",
     "incorrectAnswer": "Réponse incorrecte",
     "questionNumber": "Numéro de question",
     "enterAnswer": "Entrez votre réponse",
-    "submitAnswer": "Valider votre réponse",
+    "selectAnswer": "Sélectionnez votre réponse avec les boutons ou les touches fléchées",
+    "submitAnswer": "Soumettre votre réponse",
     "skipToMain": "Aller au contenu principal",
-    "menuButton": "Bouton menu",
-    "closeDialog": "Fermer la boîte de dialogue"
+    "menuButton": "Bouton de menu",
+    "closeDialog": "Fermer le dialogue"
   },
   "time": {
     "seconds": "secondes",
