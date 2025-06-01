@@ -412,7 +412,7 @@ class MathKidsApp {
               <div class="inline-block bg-gradient-to-br from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
                 ${i18n.t('game.question')} ${currentIndex + 1}
               </div>
-              <h2 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-8 leading-tight">
+              <h2 id="question-heading" class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-8 leading-tight">
                 ${question.question} = ?
               </h2>
             </div>
@@ -566,6 +566,12 @@ class MathKidsApp {
 
   showMultipleChoiceFeedback(isCorrect, correctAnswer = null) {
     const i18n = this.services.i18n;
+    
+    // Remove any existing feedback message
+    const existingFeedback = document.getElementById('feedbackMessage');
+    if (existingFeedback) {
+      existingFeedback.remove();
+    }
     
     // Create feedback message
     const feedbackContainer = document.createElement('div');
