@@ -402,9 +402,9 @@ export class GameService {
 
   generateAdditionDistractors(operand1, operand2, correctAnswer) {
     const strategies = [
-      () => correctAnswer + this.randomInt(1, 5), // Add a small number
-      () => correctAnswer - this.randomInt(1, 5), // Subtract a small number
-      () => operand1 + operand2 + operand1, // Add first operand twice
+      () => correctAnswer + this.randomInt(1, 5), // Add a small number to correct answer
+      () => correctAnswer - this.randomInt(1, 5), // Subtract a small number from correct answer
+      () => operand1 + operand2 + operand1, // Common mistake: add first operand twice
       () => operand1 * operand2, // Multiply instead of add
       () => Math.abs(operand1 - operand2), // Subtract instead of add
       () => operand1 + this.randomInt(1, 10), // Add to first operand only

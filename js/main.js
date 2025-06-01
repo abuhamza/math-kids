@@ -407,7 +407,7 @@ class MathKidsApp {
           </div>
 
           <!-- Enhanced Question card with better visual hierarchy -->
-          <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 border-t-4 border-gradient-to-r from-blue-500 to-purple-500">
+          <div id="questionContainer" class="bg-white rounded-3xl shadow-xl p-8 mb-6 border-t-4 border-gradient-to-r from-blue-500 to-purple-500">
             <div class="text-center mb-8">
               <div class="inline-block bg-gradient-to-br from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
                 ${i18n.t('game.question')} ${currentIndex + 1}
@@ -488,7 +488,6 @@ class MathKidsApp {
 
   setupMultipleChoiceInteractions(correctAnswer) {
     const choiceButtons = document.querySelectorAll('.choice-button');
-    let selectedButton = null;
     
     choiceButtons.forEach((button, index) => {
       // Click handler
@@ -589,7 +588,7 @@ class MathKidsApp {
     }
     
     // Insert feedback after the question container
-    const questionContainer = document.querySelector('.bg-white.rounded-3xl');
+    const questionContainer = document.getElementById('questionContainer');
     questionContainer.parentNode.insertBefore(feedbackContainer, questionContainer.nextSibling);
     
     // Announce for screen readers
