@@ -20,7 +20,8 @@ class MathKidsApp {
         audioEnabled: true,
         animationsEnabled: true,
         language: 'en'
-      }
+      },
+      usingMultipleChoice: false
     };
 
     this.services = {
@@ -157,6 +158,11 @@ class MathKidsApp {
     // Play audio feedback
     if (this.state.settings.audioEnabled) {
       this.services.audio.playFeedback(isCorrect);
+    }
+    
+    // Skip automatic advancement for multiple choice mode (handled by showMultipleChoiceFeedback)
+    if (this.state.usingMultipleChoice) {
+      return;
     }
     
     // Continue to next question or complete game
@@ -367,8 +373,19 @@ class MathKidsApp {
       return;
     }
 
+    // Set flag to indicate we're using multiple choice mode
+    this.state.usingMultipleChoice = true;
+
     // Generate multiple choice options
     const multipleChoiceOptions = this.services.game.generateMultipleChoiceOptions(question, 4);
+
+    console.log('DEBUG loadNextQuestion:', {
+      question: question.question,
+      operand1: question.operand1,
+      operand2: question.operand2,
+      correctAnswer: question.correctAnswer,
+      multipleChoiceOptions: multipleChoiceOptions
+    });
 
     const i18n = this.services.i18n;
     const appContainer = document.getElementById('app');
@@ -529,6 +546,12 @@ class MathKidsApp {
     const answer = parseFloat(selectedButton.dataset.answer);
     const isCorrect = answer === correctAnswer;
     
+    console.log('DEBUG selectChoice:', {
+      userAnswer: answer,
+      expectedCorrectAnswer: correctAnswer,
+      isCorrectUI: isCorrect
+    });
+    
     // Disable all buttons during feedback
     const choiceButtons = document.querySelectorAll('.choice-button');
     choiceButtons.forEach(button => {
@@ -552,16 +575,27 @@ class MathKidsApp {
       }
     });
     
-    // Submit the answer
-    this.submitMultipleChoiceAnswer(answer);
+    // Submit the answer with the correct answer for this question
+    this.submitMultipleChoiceAnswer(answer, correctAnswer);
   }
 
-  submitMultipleChoiceAnswer(answer) {
+  submitMultipleChoiceAnswer(answer, correctAnswer) {
+    console.log('DEBUG submitMultipleChoiceAnswer:', {
+      userAnswer: answer,
+      expectedCorrectAnswer: correctAnswer
+    });
+    
     // Submit to game service
     const result = this.services.game.submitAnswer(answer, this.currentQuestionStartTime);
     
-    // Show feedback
-    this.showMultipleChoiceFeedback(result.isCorrect, result.correctAnswer);
+    console.log('DEBUG GameService result:', {
+      isCorrectFromService: result.isCorrect,
+      correctAnswerFromService: result.correctAnswer,
+      expectedCorrectAnswer: correctAnswer
+    });
+    
+    // Show feedback using the correct answer from the current question, not from the result
+    this.showMultipleChoiceFeedback(result.isCorrect, correctAnswer);
   }
 
   showMultipleChoiceFeedback(isCorrect, correctAnswer = null) {
@@ -644,6 +678,7 @@ class MathKidsApp {
 
   completeGame() {
     this.state.isGameActive = false;
+    this.state.usingMultipleChoice = false;
     const results = this.services.game.finishGame();
     this.showGameResults(results);
   }
