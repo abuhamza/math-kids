@@ -181,17 +181,37 @@ export class GameService {
       throw new Error('No current question to answer');
     }
 
+    // Prevent multiple submissions of the same question
+    if (currentQuestion.hasBeenAnswered) {
+      console.log('Question already answered, ignoring duplicate submission');
+      return {
+        isCorrect: currentQuestion.isCorrect,
+        correctAnswer: currentQuestion.correctAnswer,
+        timeSpent: currentQuestion.timeSpent,
+        question: currentQuestion
+      };
+    }
+
     const numAnswer = parseFloat(answer);
     const isCorrect = numAnswer === currentQuestion.correctAnswer;
+    
+    console.log('DEBUG GameService.submitAnswer:', {
+      questionIndex: this.currentQuestionIndex,
+      userAnswer: numAnswer,
+      correctAnswer: currentQuestion.correctAnswer,
+      isCorrect: isCorrect,
+      question: currentQuestion.question
+    });
     
     // Calculate time spent on this question
     const timeSpent = questionStartTime ? Date.now() - questionStartTime : 0;
     currentQuestion.timeSpent = timeSpent;
     currentQuestion.attempts++;
     
-    // Store the user's answer
+    // Store the user's answer and mark as answered
     currentQuestion.userAnswer = numAnswer;
     currentQuestion.isCorrect = isCorrect;
+    currentQuestion.hasBeenAnswered = true;
     
     // Add to current game questions
     this.currentGame.questions.push({...currentQuestion});
